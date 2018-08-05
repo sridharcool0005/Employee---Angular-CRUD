@@ -267,3 +267,94 @@ export class EmployeeComponent implements OnInit {
 }
 
 ---------------------------------------------------------------------------------
+
+10)Now lets see final UI
+---------------------------------------------------------------------------------
+employee-list.component.html - Child Component
+
+
+<table class="table table-sm table-hover">
+  <tr *ngFor="let employee of employeeService.employeeList">
+    <td>{{employee.FirstName}} - {{employee.LastName}}</td>
+    <td>{{employee.EmpCode}}</td>
+    <td>
+      <a class="btn" (click)="showForEdit(employee)">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a class="btn text-danger" (click)="onDelete(employee.EmployeeID)">
+        <i class="fa fa-trash-o"></i>
+      </a>
+    </td>
+  </tr>
+</table>
+
+employee.component.html - Child Component
+
+<form class="emp-form" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+  <input type="hidden" name="EmployeeID" #EmployeeID="ngModel" [(ngModel)]="employeeService.selectedEmployee.EmployeeID">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input class="form-control" name="FirstName" #FirstName="ngModel" [(ngModel)]="employeeService.selectedEmployee.FirstName"
+        placeholder="First Name" required>
+      <div class="validation-error" *ngIf="FirstName.invalid && FirstName.touched">This Field is Required.</div>
+    </div>
+    <div class="form-group col-md-6">
+      <input class="form-control" name="LastName" #LastName="ngModel" [(ngModel)]="employeeService.selectedEmployee.LastName" placeholder="Last Name"
+        required>
+      <div class="validation-error" *ngIf="LastName.invalid && LastName.touched">This Field is Required.</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" name="Position" #Position="ngModel" [(ngModel)]="employeeService.selectedEmployee.Position" placeholder="Position">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <input class="form-control" name="EmpCode" #EmpCode="ngModel" [(ngModel)]="employeeService.selectedEmployee.EmpCode" placeholder="Emp Code">
+    </div>
+    <div class="form-group col-md-6">
+      <input class="form-control" name="Office" #Office="ngModel" [(ngModel)]="employeeService.selectedEmployee.Office" placeholder="Office">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <button [disabled]="!employeeForm.valid" type="submit" class="btn btn-lg btn-block btn-info">
+        <i class="fa fa-floppy-o"></i> Submit</button>
+    </div>
+    <div class="form-group col-md-4">
+      <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm(employeeForm)">
+        <i class="fa fa-repeat"></i> Reset</button>
+    </div>
+  </div>
+</form>
+
+
+employees.component.html - Root
+
+<div style="text-align:center">
+  <h2 class="jumbotron bg-secondary text-white">Employee Register</h2>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <app-employee></app-employee>
+  </div>
+  <div class="col-md-6">
+    <app-employee-list></app-employee-list>
+  </div>
+</div>
+
+
+11) Update Angular.json
+angular.json
+Add this toastr code
+
+"styles": [
+              "src/styles.css",
+              "../node_modules/ngx-toastr/toastr.css"
+            ],
+			
+			
+12) Observable error
+
+npm install rxjs-compat
+
+restart project
