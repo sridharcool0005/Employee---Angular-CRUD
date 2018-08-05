@@ -1,0 +1,22 @@
+Angular 6 Project Structure
+
+● src
++---● app
+|   +--● employees
+|   |  |--employees.component.ts|.html|.css
+|   |  +--● employee (employee form)
+|   |  |  |--employee.component.ts|.html|.css
+|   |  |
+|   |  +--● employee-list (list inserted employees)
+|   |  |  |--employee-list.component.ts|.html|.css
+|   |  |
+|   |  +--● shared
+|   |     |--employee.service.ts
+|   |     |--employee.model.ts
+|   |
+|   |--app.module.ts (configured firebase connection)
+|
++---● environments  
+|   |--environment.ts 
+|
+|--index.html (cdn path for bootstrap and font awesome icon)
